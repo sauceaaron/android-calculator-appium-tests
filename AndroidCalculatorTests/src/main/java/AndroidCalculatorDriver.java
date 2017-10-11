@@ -11,9 +11,25 @@ public class AndroidCalculatorDriver
 	By one = By.id("net.ludeke.calculator:id/digit1");
 	By two = By.id("net.ludeke.calculator:id/digit2");
 	By three = By.id("net.ludeke.calculator:id/digit3");
+	By four = By.id("net.ludeke.calculator:id/digit4");
+	By five = By.id("net.ludeke.calculator:id/digit5");
+	By six = By.id("net.ludeke.calculator:id/digit6");
+	By seven = By.id("net.ludeke.calculator:id/digit7");
+	By eight = By.id("net.ludeke.calculator:id/digit8");
+	By nine = By.id("net.ludeke.calculator:id/digit9");
+	By zero = By.id("net.ludeke.calculator:id/digit0");
 	
-	By plus = By.id("net.ludeke.calculator:id/plus");
-	By equals = By.id("net.ludeke.calculator:id/equals");
+	By point = By.id("net.ludeke.calculator:id/dot");
+	
+	By add = By.id("net.ludeke.calculator:id/plus");
+	By subtract = By.id("net.ludeke.calculator:id/minus");
+	By multiply = By.id("net.ludeke.calculator:id/mul");
+	By divide = By.id("net.ludeke.calculator:id/div");
+	By equals = By.id("net.ludeke.calculator:id/equal");
+	
+	By delete = By.id("net.ludeke.calculator:id/del");
+	
+	By screen = By.xpath("//android.widget.EditText[1]");
 	
 	HashMap<String, By> keys = new HashMap<String, By>() {{
 		put("1", one);
@@ -26,12 +42,13 @@ public class AndroidCalculatorDriver
 		put("8", eight);
 		put("9", nine);
 		put("0", zero);
-		put("+", plus);
-		put("-", minus);
-		put("*", times);
+		put(".", point);
+		put("+", add);
+		put("-", subtract);
+		put("*", multiply);
 		put("/", divide);
 		put("=", equals);
-		put("clear", clear);
+		put("clear", delete);
 	}};
 	
 	public AndroidCalculatorDriver(AndroidDriver driver)
@@ -51,7 +68,7 @@ public class AndroidCalculatorDriver
 	
 	public MobileElement getScreen()
 	{
-		return (MobileElement) driver.findElementByXPath("//adroid.widget.EditText[1]");
+		return (MobileElement) driver.findElement(screen);
 	}
 	
 	public String readScreen()
