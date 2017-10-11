@@ -14,9 +14,9 @@ public class SimpleAdditionTest extends AndroidTestBase
 		calculator.pressKey("2");
 		calculator.pressKey("=");
 		
-		String result = calculator.readScreen();
+		String output = calculator.readScreen();
 		
-		assertEquals("3", result);
+		assertEquals("3", output);
 	}
 }
 	
