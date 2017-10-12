@@ -15,9 +15,11 @@ public abstract class AndroidTestBase
 	{
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setCapability("platformName", "Android");
-		desiredCapabilities.setCapability("privateDevicesOnly", "true");
-		desiredCapabilities.setCapability("testobject_test_name", "calculator test recorded from appium inspector");
-		desiredCapabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY");
+//		desiredCapabilities.setCapability("platformVersion", "6");
+		desiredCapabilities.setCapability("deviceName", "Samsung Galaxy S6");
+		desiredCapabilities.setCapability("testobject_test_name", "Android calculator test");
+		desiredCapabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
+		
 		URL remoteUrl = new URL("https://us1.appium.testobject.com/wd/hub");
 		
 		driver = new AndroidDriver(remoteUrl, desiredCapabilities);
@@ -26,6 +28,9 @@ public abstract class AndroidTestBase
 	@After
 	public void tearDown()
 	{
-		driver.quit();
+		if (driver != null)
+		{
+			driver.quit();
+		}
 	}
 }
