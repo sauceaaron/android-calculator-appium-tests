@@ -30,6 +30,7 @@ public class AndroidCalculatorTests extends AndroidTestBase
 		}
 	}
 	
+	/** this is expected to fail **/
 	@Test
 	public void subtract_two_numbers() throws Exception
 	{
@@ -42,7 +43,7 @@ public class AndroidCalculatorTests extends AndroidTestBase
 		
 		String output = calculator.readScreen().trim();
 		
-		System.out.println(" ____ OUTPUT ____" + output);
+		System.out.println("output:" + output);
 		
 		try
 		{
@@ -68,7 +69,7 @@ public class AndroidCalculatorTests extends AndroidTestBase
 		
 		String output = calculator.readScreen().trim();
 		
-		System.out.println(" ____ OUTPUT ____" + output);
+		System.out.println("output:" + output);
 		
 		try
 		{
@@ -81,24 +82,23 @@ public class AndroidCalculatorTests extends AndroidTestBase
 		}
 	}
 	
-	/** This should fail **/
 	@Test
 	public void divide_two_numbers() throws Exception
 	{
 		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
 		
-		calculator.pressKey("7");
-		calculator.pressKey("/");
 		calculator.pressKey("8");
+		calculator.pressKey("/");
+		calculator.pressKey("3");
 		calculator.pressKey("=");
 		
 		String output = calculator.readScreen().trim();
 		
-		System.out.println(" ____ OUTPUT ____" + output);
+		System.out.println("output:" + output);
 		
 		try
 		{
-			assertEquals("0", output);
+			assertEquals("3", output);
 			status = PASSED;
 		}
 		catch (AssertionError e)
