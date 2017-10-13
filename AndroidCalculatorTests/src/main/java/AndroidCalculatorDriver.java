@@ -29,7 +29,7 @@ public class AndroidCalculatorDriver
 	
 	By delete = By.id("net.ludeke.calculator:id/del");
 	
-	By screen = By.xpath("//android.widget.EditText[1]");
+	By screen = By.id("net.ludeke.calculator:id/display");
 	
 	HashMap<String, By> keys = new HashMap<String, By>() {{
 		put("1", one);
@@ -68,7 +68,8 @@ public class AndroidCalculatorDriver
 	
 	public MobileElement getScreen()
 	{
-		return (MobileElement) driver.findElement(screen);
+		return (MobileElement) driver.findElementsByXPath("//android.widget.EditText").get(0);
+//		return (MobileElement) driver.findElement(screen);
 	}
 	
 	public String readScreen()

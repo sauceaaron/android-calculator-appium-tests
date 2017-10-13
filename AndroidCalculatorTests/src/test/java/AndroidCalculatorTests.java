@@ -1,11 +1,13 @@
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
-public class SimpleAdditionTest extends AndroidTestBase
+public class AndroidCalculatorTests extends AndroidTestBase
 {
 	@Test
-	public void sampleTest()
+	public void add_two_numbers() throws IOException
 	{
 		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
 		
@@ -14,7 +16,8 @@ public class SimpleAdditionTest extends AndroidTestBase
 		calculator.pressKey("2");
 		calculator.pressKey("=");
 		
-		String output = calculator.readScreen();
+		String output = calculator.readScreen().trim();
+		System.out.println("output: " + output);
 		
 		assertEquals("3", output);
 	}
