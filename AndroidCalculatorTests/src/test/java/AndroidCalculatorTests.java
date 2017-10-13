@@ -19,7 +19,91 @@ public class AndroidCalculatorTests extends AndroidTestBase
 		String output = calculator.readScreen().trim();
 		System.out.println("output: " + output);
 		
-		assertEquals("3", output);
+		try
+		{
+			assertEquals("3", output);
+			status = PASSED;
+		}
+		catch (AssertionError e)
+		{
+			status = FAILED;
+		}
+	}
+	
+	@Test
+	public void subtract_two_numbers() throws Exception
+	{
+		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
+		
+		calculator.pressKey("7");
+		calculator.pressKey("-");
+		calculator.pressKey("8");
+		calculator.pressKey("=");
+		
+		String output = calculator.readScreen().trim();
+		
+		System.out.println(" ____ OUTPUT ____" + output);
+		
+		try
+		{
+			assertEquals("-1", output);
+			status = PASSED;
+		}
+		catch (AssertionError e)
+		{
+			status = FAILED;
+		}
+	}
+	
+	
+	@Test
+	public void multiply_two_numbers() throws Exception
+	{
+		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
+		
+		calculator.pressKey("7");
+		calculator.pressKey("*");
+		calculator.pressKey("8");
+		calculator.pressKey("=");
+		
+		String output = calculator.readScreen().trim();
+		
+		System.out.println(" ____ OUTPUT ____" + output);
+		
+		try
+		{
+			assertEquals("56", output);
+			status = PASSED;
+		}
+		catch (AssertionError e)
+		{
+			status = FAILED;
+		}
+	}
+	
+	/** This should fail **/
+	@Test
+	public void divide_two_numbers() throws Exception
+	{
+		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
+		
+		calculator.pressKey("7");
+		calculator.pressKey("/");
+		calculator.pressKey("8");
+		calculator.pressKey("=");
+		
+		String output = calculator.readScreen().trim();
+		
+		System.out.println(" ____ OUTPUT ____" + output);
+		
+		try
+		{
+			assertEquals("0", output);
+			status = PASSED;
+		}
+		catch (AssertionError e)
+		{
+			status = FAILED;
+		}
 	}
 }
-	

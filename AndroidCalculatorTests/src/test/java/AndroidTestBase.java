@@ -1,4 +1,3 @@
-import com.google.gson.Gson;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 public abstract class AndroidTestBase
 {
@@ -19,6 +17,7 @@ public abstract class AndroidTestBase
 	public TestName testName = new TestName();
 	
 	protected AndroidDriver driver;
+	protected String sessionId;
 	protected boolean status;
 	
 	protected static final String TESTOBJECT_URL_EU = "https://eu1.appium.testobject.com/wd/hub";
@@ -36,7 +35,7 @@ public abstract class AndroidTestBase
 		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setCapability("platformName", "Android");
-		desiredCapabilities.setCapability("platformVersion", "6");
+//		desiredCapabilities.setCapability("platformVersion", "6");
 //		desiredCapabilities.setCapability("deviceName", "Samsung Galaxy S6");
 		
 		desiredCapabilities.setCapability("testobject_api_key", System.getenv("TESTOBJECT_API_KEY"));
@@ -44,25 +43,26 @@ public abstract class AndroidTestBase
 		desiredCapabilities.setCapability("testobject_test_name", testName.getMethodName());
 		
 		driver = new AndroidDriver(remoteUrl, desiredCapabilities);
-		
 		System.out.println("capabilities: " + driver.getCapabilities());
+		
+		sessionId = driver.getSessionId().toString();
 	}
 	
 	@After
 	public void tearDown() throws IOException
 	{
+		saveTestResult(sessionId, status);
+		
 		if (driver != null)
 		{
-			reportTestResult(status);
 			driver.quit();
 		}
 	}
 	
-	protected void reportTestResult(boolean status) throws IOException
+	
+	protected static void saveTestResult(String sessionId, boolean status) throws IOException
 	{
-		String sessionId = driver.getSessionId().toString();
-		URL endpoint = new URL( TESTOBJECT_API_URL + "/session/" + sessionId + "/test");
-		
+		URL endpoint = new URL(TESTOBJECT_API_URL + "/session/" + sessionId + "/test");
 		String result = "{ \"passed\" :" + status + "}";
 		
 		HttpsURLConnection conn = (HttpsURLConnection) endpoint.openConnection();
