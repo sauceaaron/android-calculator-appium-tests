@@ -87,7 +87,7 @@ public class AndroidCalculatorTests extends AndroidTestBase
 	{
 		AndroidCalculatorDriver calculator = new AndroidCalculatorDriver(driver);
 		
-		calculator.pressKey("8");
+		calculator.pressKey("9");
 		calculator.pressKey("/");
 		calculator.pressKey("3");
 		calculator.pressKey("=");
